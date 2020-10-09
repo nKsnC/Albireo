@@ -1,6 +1,8 @@
 import logging
 import os
 
+from flask.helpers import flash
+
 FORMAT = '%(asctime)-15s %(module)s:%(lineno)d %(message)s'
 
 logging.basicConfig(format=FORMAT, datefmt='%Y/%m/%d %H:%M:%S')
@@ -13,7 +15,6 @@ if isDebug:
     logger.setLevel(logging.DEBUG)
 else:
     logger.setLevel(logging.INFO)
-
 
 from flask import Flask
 from flask_login import LoginManager
@@ -70,8 +71,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER=get_config('mail')['mail_default_sender'],
     SITE_NAME=get_config('site')['name'],
     SITE_HOST=get_config('site')['host'],
-    SITE_PROTOCOL=get_config('site')['protocol']
-)
+    SITE_PROTOCOL=get_config('site')['protocol'])
 
 app.session_interface = PgSessionInterface()
 
